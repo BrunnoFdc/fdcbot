@@ -2,10 +2,14 @@ package main
 
 import (
 	"fdcteam-bot/src/bot"
+	"fdcteam-bot/src/config"
 	"fdcteam-bot/src/database"
+	log "github.com/sirupsen/logrus"
 )
 
 func main() {
+	setupLogger()
+
 	dbErr := database.Connect()
 
 	if dbErr != nil {
@@ -19,4 +23,13 @@ func main() {
 	}
 
 	<-make(chan struct{})
+}
+
+func setupLogger() {
+	parsedLevel, err := log.ParseLevel(config.LogLevel)
+
+	if err == nil {
+		log.Infof("Log level setado para %s", config.LogLevel)
+		log.SetLevel(parsedLevel)
+	}
 }
