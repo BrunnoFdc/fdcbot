@@ -8,7 +8,7 @@ import (
 )
 
 var (
-	allowedRoles = []string{
+	allowedRoles = [...]string{
 		"940638311993716777", // Bukkit
 	}
 )
@@ -49,7 +49,8 @@ func handleCommand(session *discordgo.Session, interaction *discordgo.Interactio
 			return
 		}
 
-		log.Debugf("Adicionado cargo para o membro %s", member_util.GetFullDisplayName(user))
+		log.Debugf("Adicionado cargo %s para o membro %s",
+			informedRole.Name, member_util.GetFullDisplayName(user))
 
 		interaction_util.AnswerInteraction(session, rootInteraction, "Cargo adicionado com sucesso!")
 
