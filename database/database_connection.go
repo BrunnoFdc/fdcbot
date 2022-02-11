@@ -2,7 +2,7 @@ package database
 
 import (
 	"context"
-	"fdcteam-bot/src/config"
+	"fdcteam-bot/config"
 	log "github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -24,14 +24,14 @@ func Connect() (err error) {
 	client, err = mongo.NewClient(connectionOptions)
 
 	if err != nil {
-		log.Info("Erro ao criar cliente do MongoDB", err)
+		log.Error("Erro ao criar cliente do MongoDB", err)
 		return
 	}
 
 	err = client.Connect(context.TODO())
 
 	if err != nil {
-		log.Info("Erro ao conectar com o banco de dados", err)
+		log.Error("Erro ao conectar com o banco de dados", err)
 		return
 	}
 
