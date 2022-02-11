@@ -16,7 +16,7 @@ func main() {
 		panic(dbErr)
 	}
 
-	_, botErr := bot.StartBot()
+	botErr := bot.StartBot()
 
 	if botErr != nil {
 		panic(botErr)

@@ -8,17 +8,23 @@ import (
 	log "github.com/sirupsen/logrus"
 )
 
-func StartBot() (startedBot *discordgo.Session, err error) {
+var currentBotSession *discordgo.Session
+
+func Session() *discordgo.Session {
+	return currentBotSession
+}
+
+func StartBot() (err error) {
 	log.Info("Iniciando FdcBot...")
 
-	startedBot, err = discordgo.New("Bot " + config.DiscordToken)
+	currentBotSession, err = discordgo.New("Bot " + config.DiscordToken)
 
 	if err != nil {
 		log.Error("Erro ao criar nova sessão na API do Discord: ", err)
 		return
 	}
 
-	err = startedBot.Open()
+	err = currentBotSession.Open()
 
 	if err != nil {
 		log.Error("Erro ao conectar com o Discord: ", err)
@@ -27,14 +33,15 @@ func StartBot() (startedBot *discordgo.Session, err error) {
 
 	log.Info("Bot iniciado com sucesso!")
 
-	printBotUserInfo(startedBot)
-	configureScm(startedBot)
+	printBotUserInfo()
+	configureScm()
 
 	return
 }
 
-func printBotUserInfo(bot *discordgo.Session) {
-	botUser, err := bot.User("@me")
+func printBotUserInfo() {
+
+	botUser, err := Session().User("@me")
 
 	if err != nil {
 		log.Error("Erro ao obter informações do usuário utilizado pelo Bot", err)
@@ -44,7 +51,8 @@ func printBotUserInfo(bot *discordgo.Session) {
 	log.Printf("ID do Bot: %s#%s\n", botUser.Username, botUser.Discriminator)
 }
 
-func configureScm(bot *discordgo.Session) {
+func configureScm() {
+	bot := Session()
 	manager := scm.NewSCM()
 
 	for _, commandFeature := range command.CurrentCommands().ToFeature() {

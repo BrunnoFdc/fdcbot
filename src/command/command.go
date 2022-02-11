@@ -11,7 +11,7 @@ type Command struct {
 	Description string
 	Version     string
 	Options     []*discordgo.ApplicationCommandOption
-	Handler     func(session *discordgo.Session, interaction *discordgo.InteractionCreate)
+	Handler     func(interaction *discordgo.InteractionCreate)
 }
 
 type CommandList []Command
@@ -27,8 +27,10 @@ func (command Command) ToFeature() *discordgo_scm.Feature {
 	}
 
 	return &discordgo_scm.Feature{
-		Type:               discordgo.InteractionApplicationCommand,
-		Handler:            command.Handler,
+		Type: discordgo.InteractionApplicationCommand,
+		Handler: func(session *discordgo.Session, interaction *discordgo.InteractionCreate) {
+			command.Handler(interaction)
+		},
 		ApplicationCommand: commandInfo,
 	}
 }
