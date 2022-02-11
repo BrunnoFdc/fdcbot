@@ -1,10 +1,10 @@
 package group_service
 
 import (
-	"fdcteam-bot/src/bot"
-	"fdcteam-bot/src/config"
-	"fdcteam-bot/src/domain/errors"
-	"fdcteam-bot/src/util/member_util"
+	"fdcteam-bot/config"
+	"fdcteam-bot/domain/errors"
+	"fdcteam-bot/providers"
+	"fdcteam-bot/util/member_util"
 	"github.com/bwmarrin/discordgo"
 	log "github.com/sirupsen/logrus"
 )
@@ -22,7 +22,7 @@ func AddGroupToUser(user *discordgo.User, groupRole *discordgo.Role) *errors.Bot
 		}
 	}
 
-	err := bot.Session().GuildMemberRoleAdd(config.GuildId, user.ID, groupRole.ID)
+	err := providers.BotSession().GuildMemberRoleAdd(config.GuildId, user.ID, groupRole.ID)
 
 	if err != nil {
 		log.Errorf("Erro ao adicionar cargo para o membro %s: %s", member_util.GetFullDisplayName(user), err)

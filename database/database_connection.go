@@ -2,7 +2,7 @@ package database
 
 import (
 	"context"
-	"fdcteam-bot/src/config"
+	"fdcteam-bot/config"
 	log "github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"

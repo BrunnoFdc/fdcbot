@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fdcteam-bot/src/bot"
-	"fdcteam-bot/src/config"
-	"fdcteam-bot/src/database"
+	"fdcteam-bot/bot"
+	"fdcteam-bot/config"
+	"fdcteam-bot/database"
 	log "github.com/sirupsen/logrus"
 )
 

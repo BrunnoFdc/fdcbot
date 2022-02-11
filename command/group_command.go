@@ -1,9 +1,9 @@
 package command
 
 import (
-	"fdcteam-bot/src/bot"
-	"fdcteam-bot/src/service/group_service"
-	"fdcteam-bot/src/util/interaction_util"
+	"fdcteam-bot/providers"
+	"fdcteam-bot/service/group_service"
+	"fdcteam-bot/util/interaction_util"
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -29,7 +29,7 @@ func handleCommand(commandInteraction *discordgo.InteractionCreate) {
 	user := commandInteraction.Member.User
 
 	option := commandInteraction.ApplicationCommandData().Options[0]
-	informedRole := option.RoleValue(bot.Session(), commandInteraction.GuildID)
+	informedRole := option.RoleValue(providers.BotSession(), commandInteraction.GuildID)
 
 	err := group_service.AddGroupToUser(user, informedRole)
 

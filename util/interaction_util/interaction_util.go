@@ -1,13 +1,13 @@
 package interaction_util
 
 import (
-	"fdcteam-bot/src/bot"
+	"fdcteam-bot/providers"
 	"github.com/bwmarrin/discordgo"
 	log "github.com/sirupsen/logrus"
 )
 
 func AnswerInteraction(interaction *discordgo.Interaction, responseContent string) {
-	err := bot.Session().InteractionRespond(interaction, &discordgo.InteractionResponse{
+	err := providers.BotSession().InteractionRespond(interaction, &discordgo.InteractionResponse{
 		Type: discordgo.InteractionResponseChannelMessageWithSource,
 		Data: &discordgo.InteractionResponseData{
 			Content: responseContent,
