@@ -1,4 +1,4 @@
-FROM alpine:3.15
+FROM ubuntu:20.04
 
 ADD out/production/fdcbot_production /bot/fdcbot
 

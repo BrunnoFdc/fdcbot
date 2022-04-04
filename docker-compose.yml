@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  bot:
+    image: brunnofdc/fdcbot:1.0.1
+    deploy:
+      resources:
+        limits:
+          cpus: "1"
+          memory: "512M"
+    volumes:
+      - "/etc/ssl/certs:/etc/ssl/certs:ro"
