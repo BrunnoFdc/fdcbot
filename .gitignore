@@ -15,3 +15,5 @@ Godeps/
 cmake-build-*/
 out/
 .idea/
+
+docker-compose.yml

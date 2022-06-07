@@ -3,18 +3,11 @@ package main
 import (
 	"fdcteam-bot/bot"
 	"fdcteam-bot/config"
-	"fdcteam-bot/database"
 	log "github.com/sirupsen/logrus"
 )
 
 func main() {
 	setupLogger()
-
-	dbErr := database.Connect()
-
-	if dbErr != nil {
-		panic(dbErr)
-	}
 
 	botErr := bot.StartBot()
 
