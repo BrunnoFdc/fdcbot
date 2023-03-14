@@ -18,3 +18,4 @@ out/
 
 docker-compose.yml
 .env
+.local.env
